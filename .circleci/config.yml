@@ -1,10 +1,13 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+executors:
+  docker-publisher:
     environment:
       IMAGE_NAME: building-on-ci
     docker:
       - image: circleci/buildpack-deps:stretch
+jobs:
+  build:
+    executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker
@@ -13,10 +16,7 @@ jobs:
           command: |
             docker build -t $IMAGE_NAME:latest .
   publish-latest:
-    environment:
-      IMAGE_NAME: building-on-ci
-    docker:
-      - image: circleci/buildpack-deps:stretch
+    executor: docker-publisher
     steps:
       - setup_remote_docker
       - run:
