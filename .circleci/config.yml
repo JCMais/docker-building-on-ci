@@ -1,5 +1,4 @@
-version: 2
-executorType: docker
+version: 2.1
 jobs:
   build:
     environment:
