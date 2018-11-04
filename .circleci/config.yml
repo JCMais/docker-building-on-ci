@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 jobs:
   build:
     environment:
@@ -12,7 +12,7 @@ jobs:
           name: Build Docker image
           command: |
             docker build -t $IMAGE_NAME:latest .
-  publishLatest:
+  publish-latest:
     environment:
       IMAGE_NAME: building-on-ci
     docker:
@@ -32,7 +32,7 @@ workflows:
           filters:
             branches:
               only: master
-      - publishLatest:
+      - publish-latest:
           requires:
             - build
           filters:
